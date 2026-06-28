@@ -21,3 +21,25 @@ class MyModel(nn.Module):
 model = MyModel(input_dim=10)
 model.load_state_dict(torch.load('rice_model.pth', map_location='cpu'))
 model.eval()
+
+st.title("🌾 Pytorch Rice Classifier ")
+st.write("This model predicts if the rice under test is either Jasmin or Gonen")
+st.header("Used Dataset")
+st.dataframe(df)
+
+st.sidebar.title("Input Rice Properties")
+col1, col2 = st.sidebar.columns(2)
+
+with col1:
+    area = st.number_input("Area", value=5000.0)
+    major_axis = st.number_input("Major Axis Length", value=100.0)
+    minor_axis = st.number_input("Minor Axis Length", value=40.0)
+    eccentricity = st.number_input("Eccentricity", value=0.8)
+    convex_area = st.number_input("Convex Area", value=5100.0)
+
+with col2:
+    equiv_dia = st.number_input("Equiv Diameter", value=80.0)
+    extent = st.number_input("Extent", value=0.7)
+    perimeter = st.number_input("Perimeter", value=300.0)
+    roundness = st.number_input("Roundness", value=0.8)
+    aspect_ratio = st.number_input("Aspect Ratio", value=2.0)
