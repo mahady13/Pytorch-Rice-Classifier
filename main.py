@@ -64,3 +64,9 @@ if st.sidebar.button("Predict Rice Type"):
         output = model(input_tensor)
         prob = torch.sigmoid(output).item()
         prediction = 1 if prob >= 0.5 else 0
+
+    st.sidebar.subheader("Result:")
+    if prediction == 1:
+        st.sidebar.success(f"This is (Jasmine) Rice. Confidence: {prob * 100:.2f}%")
+    else:
+        st.sidebar.info(f"This is (Gonen) Rice। Confidence: {(1 - prob) * 100:.2f}%")
