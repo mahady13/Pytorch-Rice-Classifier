@@ -43,3 +43,24 @@ with col2:
     perimeter = st.number_input("Perimeter", value=300.0)
     roundness = st.number_input("Roundness", value=0.8)
     aspect_ratio = st.number_input("Aspect Ratio", value=2.0)
+
+if st.sidebar.button("Predict Rice Type"):
+    normalized_input = [
+        area / 10210.0,
+        major_axis / 183.21,
+        minor_axis / 82.55,
+        eccentricity / 0.96,
+        convex_area / 11008.0,
+        equiv_dia / 114.01,
+        extent / 0.88,
+        perimeter / 508.51,
+        roundness / 0.90,
+        aspect_ratio / 3.91
+    ]
+
+    input_tensor = torch.tensor([normalized_input], dtype=torch.float32)
+
+    with torch.no_grad():
+        output = model(input_tensor)
+        prob = torch.sigmoid(output).item()
+        prediction = 1 if prob >= 0.5 else 0
