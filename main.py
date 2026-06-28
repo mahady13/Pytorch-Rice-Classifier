@@ -17,3 +17,7 @@ class MyModel(nn.Module):
 
     def forward(self, X):
         return self.net(X)
+
+model = MyModel(input_dim=10)
+model.load_state_dict(torch.load('rice_model.pth', map_location='cpu'))
+model.eval()
